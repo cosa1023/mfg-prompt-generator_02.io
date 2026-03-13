@@ -1,0 +1,39 @@
+{
+  "steps": [
+    { "zh": "原料入庫", "en": "MATERIAL WAREHOUSE" },
+    { "zh": "品質檢驗 (OQC/IQC)", "en": "OQC/IQC QUALITY INSPECTION" },
+    { "zh": "人員工位計算 (UPH/UPPH)", "en": "UPH/UPPH CALCULATION STATION" },
+    { "zh": "網版試調 (SMT EMBEDDED)", "en": "SMT EMBEDDED STENCIL ADJUSTMENT" },
+    { "zh": "貼片 (SMT SOLDERING)", "en": "SMT SOLDERING" },
+    { "zh": "X光機檢測 (X-RAY)", "en": "X-RAY INSPECTION" },
+    { "zh": "自動光學檢測 (AOI)", "en": "AOI INSPECTION" },
+    { "zh": "首件檢驗 (FAI)", "en": "FIRST ARTICLE INSPECTION (FAI)" },
+    { "zh": "注塑成型 (INJECTION)", "en": "INJECTION MOLDING" },
+    { "zh": "模具校正 (TOOLING)", "en": "FABRICATION TOOLING CALIBRATION" },
+    { "zh": "工廠模式 (FDM)", "en": "(SWDL) FACTORY MODE - FDM" },
+    { "zh": "功能測試 (FCT)", "en": "(FCT) FUNCTION TEST" },
+    { "zh": "無線電測試 (RF)", "en": "(RF) RADIO TEST" },
+    { "zh": "噴漆塗裝 (HOUSING)", "en": "HOUSING COSMETIC COATING" },
+    { "zh": "燒錄測試 (BURN-IN)", "en": "BURN-IN TEST" },
+    { "zh": "外觀檢查 (INSPECTION)", "en": "VISUAL INSPECTION" },
+    { "zh": "電池充電 (BATTERY)", "en": "BATTERY CHARGING" },
+    { "zh": "氣密防水 (WATER PROOF)", "en": "WATERPROOF AIRTIGHT TEST" },
+    { "zh": "雷雕機 (LASERS)", "en": "LASER MARKING" },
+    { "zh": "使用者模式 (SWDL/USER)", "en": "SWDL/USER MODE" },
+    { "zh": "功能檢查 (MMI)", "en": "MMI FUNCTION CHECK" },
+    { "zh": "自動搬運 (AGV)", "en": "AGV TRANSPORT" },
+    { "zh": "系統整合 (MES)", "en": "MES INTEGRATION" },
+    { "zh": "包裝信賴性測試", "en": "PACKAGE RELIABILITY TEST" },
+    { "zh": "包裝額外標示", "en": "PACKAGE EXTRA LABELING" },
+    { "zh": "開箱檢查 (OBA)", "en": "PACKAGE OBA" },
+    { "zh": "出貨 (SHIPPING)", "en": "SHIPPING" }
+  ],
+  "extras": [
+    { "zh": "設備標籤", "en": "Equipment Asset Labels" },
+    { "zh": "NOK 退貨路徑", "en": "NOK Return Loop Arrows" },
+    { "zh": "操作人員示意圖", "en": "Human Operator Sketches" },
+    { "zh": "數據看板", "en": "Live Data Dashboards" },
+    { "zh": "安全警示標誌", "en": "Safety Warning Signs" },
+    { "zh": "AGV 搬運路徑", "en": "AGV Transport Path Lines" }
+  ]
+}

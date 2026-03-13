@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>製造流程圖 Prompt 產生器 - 專業版</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="p-4 md:p-8">
+    <div class="max-w-6xl mx-auto">
+        <!-- 頂部區域：商品資訊 (支援文字或圖片) -->
+        <div id="image-section" class="mb-6 relative group overflow-hidden rounded-2xl bg-dark-panel border-2 border-dashed border-slate-700 min-h-[220px] flex flex-col items-center justify-center transition-all hover:border-blue-500">
+            <input type="file" id="image-input" class="hidden" accept="image/*" onchange="handleImage(this)">
+            <img id="image-preview" class="hidden absolute inset-0 w-full h-full object-contain z-0">
+            
+            <div id="image-ui" class="relative z-10 text-center p-6 w-full h-full flex flex-col items-center justify-center image-placeholder-gradient">
+                <div id="no-image-content" class="w-full max-w-2xl">
+                    <i class="fas fa-edit text-3xl text-blue-500 mb-3"></i>
+                    <h2 class="text-lg font-bold text-white mb-2">商品圖片或文字描述</h2>
+                    <textarea id="product-desc" oninput="updateOutput()" placeholder="在此輸入商品的文字描述（例如：外觀特徵、材質說明、產品結構...）" 
+                        class="w-full bg-slate-900/50 border border-slate-600 rounded-lg p-3 text-sm text-slate-200 focus:border-blue-500 outline-none mb-4 resize-none h-20 shadow-inner"></textarea>
+                </div>
+
+                <div class="flex flex-wrap justify-center gap-3">
+                    <button onclick="document.getElementById('image-input').click()" class="px-5 py-2 bg-blue-600 hover:bg-blue-500 text-white rounded-full text-xs font-bold transition shadow-lg">
+                        <i class="fas fa-upload mr-2"></i>上傳商品照片
+                    </button>
+                    <button id="search-img-btn" class="px-5 py-2 bg-slate-800 hover:bg-slate-700 text-blue-400 rounded-full text-xs font-bold transition border border-slate-600">
+                        <i class="fas fa-search mr-2"></i>網頁搜尋素材
+                    </button>
+                </div>
+
+                <button id="remove-img" onclick="removeImage()" class="hidden absolute top-4 right-4 bg-red-500/80 p-2 rounded-full hover:bg-red-600 transition">
+                    <i class="fas fa-trash-alt text-white"></i>
+                </button>
+            </div>
+        </div>
+
+        <header class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
+            <h1 class="text-2xl font-bold text-white flex items-center gap-3">
+                <i class="fas fa-industry text-blue-500"></i>
+                製造流程圖 Prompt 產生器
+            </h1>
+            <button onclick="clearAll()" class="px-4 py-2 bg-slate-800 hover:bg-red-900/20 text-slate-400 rounded-lg transition text-xs border border-slate-700">
+                <i class="fas fa-undo-alt mr-2"></i>重置所有欄位
+            </button>
+        </header>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+            <div class="lg:col-span-5 space-y-6">
+                <div class="bg-dark-panel rounded-xl p-6 shadow-xl">
+                    <h2 class="text-md font-semibold mb-4 text-blue-400 flex items-center gap-2">
+                        <i class="fas fa-cube"></i> 基本資訊
+                    </h2>
+                    <div>
+                        <label class="block text-[10px] font-bold text-slate-500 mb-2 uppercase tracking-widest">商品名稱 (英中皆可)</label>
+                        <input type="text" id="product-name" oninput="updateOutput()" placeholder="例如：智慧手錶 Smart Watch" class="w-full bg-editor border border-slate-700 rounded-lg p-3 text-white focus:ring-1 focus:ring-blue-500 outline-none transition">
+                    </div>
+                </div>
+
+                <div class="bg-dark-panel rounded-xl p-6 shadow-xl">
+                    <h2 class="text-md font-semibold mb-2 text-blue-400 flex items-center gap-2">
+                        <i class="fas fa-route"></i> 製造流程 (中文多選)
+                    </h2>
+                    <p class="text-[10px] text-slate-500 mb-4 uppercase">請依照產線順序點選站點</p>
+                    <div id="step-tags" class="flex flex-wrap gap-2 max-h-[350px] overflow-y-auto pr-2 custom-scrollbar">
+                        <!-- JS 生成 -->
+                    </div>
+                </div>
+
+                <div class="bg-dark-panel rounded-xl p-6 shadow-xl border-t-2 border-blue-500/30">
+                    <h2 class="text-md font-semibold mb-3 text-blue-400 flex items-center gap-2">
+                        <i class="fas fa-plus-square"></i> 額外標示 (可多選)
+                    </h2>
+                    <div id="extra-tags" class="flex flex-wrap gap-2">
+                        <!-- JS 生成 -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="lg:col-span-7">
+                <div class="bg-dark-panel rounded-xl overflow-hidden shadow-xl h-full flex flex-col border border-blue-500/20">
+                    <div class="px-6 py-4 bg-slate-800/80 flex justify-between items-center border-b border-slate-700">
+                        <span class="text-sm font-medium text-slate-300 uppercase tracking-widest">生成的英文 Prompt 指令</span>
+                        <button onclick="copyPrompt()" class="px-5 py-2 bg-blue-600 hover:bg-blue-500 text-white rounded font-bold text-sm transition shadow-lg">
+                            <i class="fas fa-copy mr-2"></i>複製指令
+                        </button>
+                    </div>
+                    <div class="p-6 flex-grow bg-editor font-mono text-xs leading-relaxed custom-scrollbar overflow-y-auto">
+                        <pre id="prompt-preview" class="whitespace-pre-wrap text-blue-300/80"></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="toast" class="fixed bottom-8 left-1/2 -translate-x-1/2 bg-blue-600 text-white px-8 py-3 rounded-full shadow-2xl opacity-0 transition-all z-50 pointer-events-none font-bold">
+        已成功複製到剪貼簿！
+    </div>
+
+    <script src="data/manufacturing-steps.json" type="application/json" id="steps-data"></script>
+    <script src="script.js"></script>
+</body>
+</html>
